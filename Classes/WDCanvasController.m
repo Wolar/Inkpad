@@ -6,7 +6,7 @@
 //  License, v. 2.0. If a copy of the MPL was not distributed with this
 //  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
-//  Copyright (c) 2011-2013 Steve Sprang
+//  Copyright (c) 2011-2013 Steve Sprang, 2016 Derek Pollard
 //
 
 #import <Twitter/Twitter.h>
@@ -52,7 +52,7 @@
 @synthesize canvas = canvas_;
 @synthesize drawingController = drawingController_;
 
-- (WDDrawing *) drawing 
+- (WDDrawing *) drawing
 {
     return self.document.drawing;
 }
@@ -72,7 +72,7 @@
     popoverController_ = [[UIPopoverController alloc] initWithContentViewController:textController];
     popoverController_.passthroughViews = @[canvas_];
     
-	popoverController_.delegate = self;
+    popoverController_.delegate = self;
     
     CGRect bounds = CGRectIntegral([canvas_ convertRectToView:[text bounds]]);
     
@@ -242,11 +242,11 @@
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as PNG", @"Export as PNG")
                                   action:@selector(exportAsPNG:) target:self];
         [menus addObject:item];
-
+        
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as PDF", @"Export as PDF")
                                   action:@selector(exportAsPDF:) target:self];
         [menus addObject:item];
-
+        
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as SVG", @"Export as SVG")
                                   action:@selector(exportAsSVG:) target:self];
         [menus addObject:item];
@@ -402,7 +402,7 @@
         
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Ungroup", @"Ungroup") action:@selector(ungroup:) target:self];
         [menus addObject:item];
-
+        
         
         [menus addObject:[WDMenuItem separatorItem]];
         
@@ -627,11 +627,11 @@
     }
     // OBJECT
     else if (item.action == @selector(cut:) ||
-        item.action == @selector(copy:) ||
-        item.action == @selector(duplicate:) ||
-        item.action == @selector(duplicateInPlace:) ||
-        item.action == @selector(delete:) ||
-        item.action == @selector(selectNone:))
+             item.action == @selector(copy:) ||
+             item.action == @selector(duplicate:) ||
+             item.action == @selector(duplicateInPlace:) ||
+             item.action == @selector(delete:) ||
+             item.action == @selector(selectNone:))
     {
         item.enabled = hasSelection;
     }
@@ -745,9 +745,9 @@
             
             item.enabled = [[first fill] isKindOfClass:[WDColor class]] && [[last fill] isKindOfClass:[WDColor class]];
         } else if (item.action == @selector(desaturate:) ||
-               item.action == @selector(invertColors:) ||
-               item.action == @selector(showColorBalance:) ||
-               item.action == @selector(showHueAndSaturation:))
+                   item.action == @selector(invertColors:) ||
+                   item.action == @selector(showColorBalance:) ||
+                   item.action == @selector(showHueAndSaturation:))
         {
             item.enabled = canAdjustColor;
         }
@@ -917,10 +917,10 @@
     [self hidePopovers];
     
     popoverController_ = [[UIPopoverController alloc] initWithContentViewController:controller];
-	popoverController_.delegate = self;
+    popoverController_.delegate = self;
     popoverController_.passthroughViews = @[self.navigationController.toolbar,
-                                           self.navigationController.navigationBar,
-                                           self.canvas];
+                                            self.navigationController.navigationBar,
+                                            self.canvas];
     [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
     return popoverController_;
@@ -962,22 +962,22 @@
 {
     if (editingItems_) {
         return editingItems_;
-    } 
-
+    }
+    
     UIBarButtonItem *objectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit")
-                                                 style:UIBarButtonItemStyleBordered
-                                                target:self
-                                                action:@selector(showObjectMenu:)];
-    
-    UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Arrange", @"Arrange")
-                                                                 style:UIBarButtonItemStyleBordered
-                                                                target:self
-                                                                action:@selector(showArrangeMenu:)];
-    
-    UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Path", @"Path")
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
-                                                                  action:@selector(showPathMenu:)];
+                                                                  action:@selector(showObjectMenu:)];
+    
+    UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Arrange", @"Arrange")
+                                                                    style:UIBarButtonItemStyleBordered
+                                                                   target:self
+                                                                   action:@selector(showArrangeMenu:)];
+    
+    UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Path", @"Path")
+                                                                 style:UIBarButtonItemStyleBordered
+                                                                target:self
+                                                                action:@selector(showPathMenu:)];
     
     WDButton *imageButton = [WDButton buttonWithType:UIButtonTypeCustom];
     imageButton.showsTouchWhenHighlighted = YES;
@@ -992,11 +992,11 @@
     
     
     UIBarButtonItem *fontItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"font.png"]
-                                                 style:UIBarButtonItemStylePlain
-                                                target:self
-                                                action:@selector(showFontPanel:)];
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(showFontPanel:)];
     
-	undoItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"undo.png"]
+    undoItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"undo.png"]
                                                  style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(undo:)];
@@ -1047,18 +1047,18 @@
     [strokeWell_ setPainter:[self.drawingController.propertyManager activeStrokeStyle].color];
     
     
-	editingItems_ = @[objectItem, smallFixedItem,
-                     arrangeItem, smallFixedItem,
-                     pathItem, fixedItem,
-                     colorItem_, fixedItem,
-                     undoItem_, fixedItem,
-                     redoItem_, flexibleItem, 
-                     fontItem, fixedItem,
-                     shadowItem, fixedItem,
-                     strokeItem, fixedItem,
-                     fillItem, fixedItem,
-                     swatchItem, fixedItem,
-                     layerItem_];
+    editingItems_ = @[objectItem, smallFixedItem,
+                      arrangeItem, smallFixedItem,
+                      pathItem, fixedItem,
+                      colorItem_, fixedItem,
+                      undoItem_, fixedItem,
+                      redoItem_, flexibleItem,
+                      fontItem, fixedItem,
+                      shadowItem, fixedItem,
+                      strokeItem, fixedItem,
+                      fillItem, fixedItem,
+                      swatchItem, fixedItem,
+                      layerItem_];
     
     return editingItems_;
 }
@@ -1067,8 +1067,8 @@
 {
     
     actionItem_ = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                   target:self action:@selector(showActionMenu:)];
+                   initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                   target:self action:@selector(showActionMenu:)];
     
     gearItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"]
                                                  style:UIBarButtonItemStylePlain
@@ -1085,12 +1085,12 @@
                                                      target:self
                                                      action:@selector(scaleDocumentToFit:)];
     
-	NSArray *items = @[actionItem_, gearItem_, albumItem_, zoomToFitItem_];
+    NSArray *items = @[actionItem_, gearItem_, albumItem_, zoomToFitItem_];
     
     // make sure the album item has the proper enabled state
     albumItem_.enabled = self.drawing.activeLayer.editable;
     
-    return items;    
+    return items;
 }
 
 - (void) enableDocumentItems
@@ -1117,7 +1117,7 @@
     
     [canvas_ invalidateSelectionView];
 }
- 
+
 - (void) fillChanged:(NSNotification *)aNotification
 {
     [fillWell_ setPainter:[self.drawingController.propertyManager activeFillStyle]];
@@ -1143,7 +1143,7 @@
 
 - (void) undoStatusDidChange:(NSNotification *)aNotification
 {
-    dispatch_async(dispatch_get_main_queue(), ^{ 
+    dispatch_async(dispatch_get_main_queue(), ^{
         undoItem_.enabled = [document_.undoManager canUndo];
         redoItem_.enabled = [document_.undoManager canRedo];
         
@@ -1188,7 +1188,7 @@
 - (void) didEnterBackground:(NSNotification *)aNotification
 {
     if ([self.document hasUnsavedChanges]) {
-        // might get terminated while backgrounded, so save now        
+        // might get terminated while backgrounded, so save now
         UIApplication              *app = [UIApplication sharedApplication];
         
         __block UIBackgroundTaskIdentifier task = [app beginBackgroundTaskWithExpirationHandler:^{
@@ -1216,15 +1216,17 @@
     
     // revert back to selection tool
     [WDToolManager sharedInstance].activeTool = ([WDToolManager sharedInstance].tools)[0];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     if (canvas_.drawing) {
         return;
     }
-    
-    [super viewWillAppear:animated];
     
     [self setToolbarItems:[self editingItems] animated:YES];
     
@@ -1236,7 +1238,7 @@
     [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithWhite:0.92 alpha:1];
     
     self.navigationItem.rightBarButtonItems = [self upperRightToolbarItems];
-
+    
     if (self.drawing) {
         canvas_.drawing = self.drawing;
         [canvas_ scaleDocumentToFit];
@@ -1251,7 +1253,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    
     if (document_.documentState != UIDocumentStateClosed) {
         [document_ closeWithCompletionHandler:nil];
     }
@@ -1415,9 +1417,9 @@
     [facebookSheet addImage:self.drawing.image];
     [facebookSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
     
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        [self presentViewController:facebookSheet animated:YES completion:nil];
-    });
+    [self hidePopovers];
+    
+    [self presentViewController:facebookSheet animated:YES completion:nil];
 }
 
 - (void) tweetDrawing:(id)sender
@@ -1426,7 +1428,7 @@
     
     [tweetSheet addImage:self.drawing.image];
     [tweetSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
-
+    
     [self hidePopovers];
     
     [self presentViewController:tweetSheet animated:YES completion:nil];
@@ -1451,7 +1453,9 @@
 {
     NSString *baseFilename = [self.document.filename stringByDeletingPathExtension];
     NSString *filename = nil;
-
+    
+    [self hidePopovers];
+    
     // Generates export file in requested format
     if ([format isEqualToString:@"PDF"]) {
         filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[baseFilename stringByAppendingPathExtension:@"pdf"]];
@@ -1463,7 +1467,7 @@
         filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[baseFilename stringByAppendingPathExtension:@"svg"]];
         [[self.drawing SVGRepresentation] writeToFile:filename atomically:YES];
     }
-
+    
     // Passes exported file to UIDocumentInteractionController
     exportFileUrl = [NSURL fileURLWithPath:filename];
     if(exportFileUrl) {
@@ -1491,7 +1495,7 @@
 #pragma mark - UIDocumentInteractionController
 
 - (UIViewController *) documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
-    return self.navigationController;
+    return self;
 }
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller
