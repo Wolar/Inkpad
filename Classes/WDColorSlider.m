@@ -106,6 +106,7 @@ static void release(void *info) {
     self.opaque = NO;
     self.backgroundColor = nil;
     self.clearsContextBeforeDrawing = YES;
+    [super awakeFromNib];
 }
 
 - (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event

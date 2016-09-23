@@ -33,6 +33,7 @@
     UIImageView *selectionView = [[UIImageView alloc] init];
     self.selectedBackgroundView = selectionView;
     selectionView.backgroundColor = [UIColor colorWithRed:(193.0f / 255) green:(220.0f / 255) blue:1.0f alpha:0.666f];
+    [super awakeFromNib];
 }
 
 - (void) setDrawingLayer:(WDLayer *)layer

@@ -32,6 +32,7 @@ const float kArrowDimension = 6;
     CGPathAddEllipseInRect(pathRef, NULL, rect);
     self.layer.shadowPath = pathRef;
     CGPathRelease(pathRef);
+    [super awakeFromNib];
 }
 
 - (void) drawRect:(CGRect)rect

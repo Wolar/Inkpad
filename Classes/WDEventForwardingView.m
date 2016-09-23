@@ -20,6 +20,7 @@
 {
     self.opaque = NO;
     self.backgroundColor = nil;
+    [super awakeFromNib];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

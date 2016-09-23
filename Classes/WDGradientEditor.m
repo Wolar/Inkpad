@@ -51,6 +51,7 @@
     [gestureView addGestureRecognizer:tap];
     
     self.gradient = [WDGradient defaultGradient];
+    [super awakeFromNib];
 }
 
 - (void) handleSingleTap:(UISwipeGestureRecognizer*)gesture

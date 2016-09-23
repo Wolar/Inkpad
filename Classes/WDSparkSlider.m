@@ -62,6 +62,7 @@
     [self addSubview:title_];
     
     maxValue_ = 100;
+    [super awakeFromNib];
 }
 
 - (CGRect) trackRect
