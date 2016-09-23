@@ -1491,7 +1491,7 @@
 #pragma mark - UIDocumentInteractionController
 
 - (UIViewController *) documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
-    return self;
+    return self.navigationController;
 }
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller
